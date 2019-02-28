@@ -4,13 +4,15 @@ import Webcam from 'react-webcam';
 import { loadModels, getFullFaceDescription, createMatcher } from '../api/face';
 
 // Import face profile
-const JSON_PROFILE = require('../descriptors/bnk48.json');
+const JSON_PROFILE = require('../descriptors/mock-db.json');
 
 const WIDTH = 420;
 const HEIGHT = 420;
 const inputSize = 160;
 
 class VideoInput extends Component {
+
+  myredirect = {};
   constructor(props) {
     super(props);
     this.webcam = React.createRef();
@@ -51,6 +53,11 @@ class VideoInput extends Component {
   startCapture = () => {
     this.interval = setInterval(() => {
       this.capture();
+      if (this.state.match && this.state.match[0] && this.state.match[0]._label ==="Tjeli")
+        window.location.replace('http://192.168.45.171:4200/index/1');
+      // window.location.replace('http://192.168.45.174:4200/index/3');
+      if (this.state.match && this.state.match[0] && this.state.match[0]._label ==="Eddie")
+        window.location.replace('http://192.168.45.174:4200/index/3');
     }, 1500);
   };
 
@@ -76,6 +83,7 @@ class VideoInput extends Component {
         let match = await this.state.descriptors.map(descriptor =>
           this.state.faceMatcher.findBestMatch(descriptor)
         );
+        console.log(match);
         this.setState({ match });
       }
     }
@@ -111,7 +119,7 @@ class VideoInput extends Component {
               style={{
                 position: 'absolute',
                 border: 'solid',
-                borderColor: 'blue',
+                borderColor: 'limegreen',
                 height: _H,
                 width: _W,
                 transform: `translate(${_X}px,${_Y}px)`
@@ -120,9 +128,9 @@ class VideoInput extends Component {
               {!!match && !!match[i] ? (
                 <p
                   style={{
-                    backgroundColor: 'blue',
+                    backgroundColor: 'limegreen',
                     border: 'solid',
-                    borderColor: 'blue',
+                    borderColor: 'limegreen',
                     width: _W,
                     marginTop: 0,
                     color: '#fff',
@@ -130,6 +138,7 @@ class VideoInput extends Component {
                   }}
                 >
                   {match[i]._label}
+                  {/* {if (match[i]._label == "Eddie")} */}
                 </p>
               ) : null}
             </div>
