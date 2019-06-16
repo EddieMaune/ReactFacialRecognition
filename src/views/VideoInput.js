@@ -56,8 +56,8 @@ class VideoInput extends Component {
       if (this.state.match && this.state.match[0] && this.state.match[0]._label ==="Tjeli")
         window.location.replace('http://192.168.45.171:4200/index/1');
       // window.location.replace('http://192.168.45.174:4200/index/3');
-      if (this.state.match && this.state.match[0] && this.state.match[0]._label ==="Eddie")
-        window.location.replace('http://192.168.45.174:4200/index/3');
+      //if (this.state.match && this.state.match[0] && this.state.match[0]._label ==="Eddie")
+        //window.location.replace('http://192.168.45.174:4200/index/3');
     }, 1500);
   };
 
@@ -119,7 +119,7 @@ class VideoInput extends Component {
               style={{
                 position: 'absolute',
                 border: 'solid',
-                borderColor: 'limegreen',
+                borderColor: `${match && match[i] &&  match[i]._label == "unknown"? "red": "limegreen"}`,
                 height: _H,
                 width: _W,
                 transform: `translate(${_X}px,${_Y}px)`
@@ -128,9 +128,9 @@ class VideoInput extends Component {
               {!!match && !!match[i] ? (
                 <p
                   style={{
-                    backgroundColor: 'limegreen',
+                    backgroundColor: `${match[i]._label == "unknown"? "red": "limegreen"}`,
                     border: 'solid',
-                    borderColor: 'limegreen',
+                    borderColor: `${match[i]._label == "unknown"? "red": "limegreen"}`,
                     width: _W,
                     marginTop: 0,
                     color: '#fff',

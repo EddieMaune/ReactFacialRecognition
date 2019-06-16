@@ -31,24 +31,13 @@ class ImageInput extends Component {
 
   handleImage = async (image = this.state.imageURL) => {
     await getFullFaceDescription(image).then(fullDesc => {
-        console.log(fullDesc);
-      //  var t = document.getElementById("text");
-       // t.innerHTML = JSON.stringify(fullDesc);
-    //     var descrArray = [];
-    //     t.innerHTML = "["
-    //    for (let value in s)
-    //    {
-    //        t.innerHTML += s[value];
-    //        t.innerHTML += ","
-    //         descrArray.push(s[value]);
-    //    }
-    //    t.innerHTML +=  "]";
       if (!!fullDesc) {
         this.setState({
           fullDesc,
           detections: fullDesc.map(fd => fd.detection),
           descriptors: fullDesc.map(fd => fd.descriptor)
         });
+        console.log(this.state.descriptors[0]);
       }
     });
 
